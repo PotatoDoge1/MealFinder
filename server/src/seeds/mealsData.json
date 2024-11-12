@@ -1,0 +1,5 @@
+[
+    { "mealName": "Arrabiata", "mealDBId": 52771, "strCategory": "Vegetarian", "strArea": "Italian", "strInstructions": "Here's some instructions!" },
+    { "mealName": "Smoked Haddock Kedgeree", "mealDBId": 52964, "strCategory": "Breakfast", "strArea": "Indian", "strInstructions": "Do some stuff!" },
+    { "mealName": "Strawberries Romanoff", "mealDBId": 53082, "strCategory": "Dessert", "strArea": "Russian", "strInstructions": "In a bowl do some stuff!" }
+]
