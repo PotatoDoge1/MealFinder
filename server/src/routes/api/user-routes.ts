@@ -1,15 +1,17 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { User } from '../../models/index.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
 // GET /users - Get all users
-//localhost:3001/api/users
+// localhost:3001/api/users
 router.get('/', async (_req: Request, res: Response) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
     });
     res.json(users);
   } catch (error: any) {
@@ -18,12 +20,12 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 // GET /users/:id - Get a user by id
-//localhost3001/api/users/:id
+// localhost:3001/api/users/:id
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
     });
     if (user) {
       res.json(user);
@@ -35,6 +37,47 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
+// POST /users/signup - User signup
+// localhost:3001/api/users/signup
+router.post('/signup', async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  try {
+    // Check if the username already exists
+    const existingUser = await User.findOne({ where: { username } });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username already exists. Please choose another one.' });
+    }
+
+    // Hash the password before storing it
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create the new user
+    const newUser = await User.create({
+      username,
+      password: hashedPassword,
+    });
+
+    // Generate a JWT token
+    const token = jwt.sign(
+      { userId: newUser.userId, username: newUser.username },
+      process.env.JWT_SECRET as string,
+      { expiresIn: '1h' }
+    );
+
+    return res.status(201).json({
+      message: 'User created successfully',
+      user: {
+        userId: newUser.userId,
+        username: newUser.username,
+      },
+      token,
+    });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 // PUT /users/:id - Update a user by id
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -43,7 +86,7 @@ router.put('/:id', async (req: Request, res: Response) => {
     const user = await User.findByPk(id);
     if (user) {
       user.username = username;
-      user.password = password;
+      user.password = await bcrypt.hash(password, 12);
       await user.save();
       res.json(user);
     } else {
