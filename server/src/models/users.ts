@@ -10,6 +10,9 @@ interface UserAttributes {
 interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> {}
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+    favoriteMeals(favoriteMeals: any) {
+        throw new Error('Method not implemented.');
+    }
     public userId!: number;
     public username!: string;
     public password!: string;
