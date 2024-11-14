@@ -7,10 +7,9 @@ interface UserAttributes {
     password: string;
 }
 
-interface UserCreationAttributes extends Optional< UserAttributes, 'userId' > {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> {}
 
-export class User extends Model< UserAttributes, UserCreationAttributes> implements UserAttributes 
-{
+export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
     public userId!: number;
     public username!: string;
     public password!: string;
@@ -31,16 +30,17 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             userId: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
-                primaryKey: true
+                primaryKey: true,
             },
             username: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true, // added unique constraint to require unique usernames
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false
-            }
+                allowNull: false,
+            },
         },
         {
             tableName: 'users',
@@ -51,8 +51,8 @@ export function UserFactory(sequelize: Sequelize): typeof User {
                 },
                 beforeUpdate: async (user: User) => {
                     await user.setPassword(user.password);
-                }
-            }
+                },
+            },
         }
     );
 
