@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App';
 import Error from './pages/Error';
-import Search from './pages/search';
+import Search from './pages/Search';
 import Saved from './pages/Saved';
 
 const router = createBrowserRouter([
