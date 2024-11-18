@@ -1,7 +1,7 @@
 [
-    { "mealId": 1, "mealName": "Arrabiata", "userId": 1, "username": "user1" },
-    { "mealId": 2, "mealName": "Smoked Haddock Kedgeree", "userId": 1, "username": "user1" },
-    { "mealId": 3, "mealName": "Strawberries Romanoff", "userId": 1, "username": "user1" },
-    { "mealId": 2, "mealName": "Smoked Haddock Kedgeree", "userId": 2, "username": "user2" },
-    { "mealId": 3, "mealName": "Strawberries Romanoff", "userId": 3, "username": "user3" }
+    { "mealId": 1, "userId": 1 },
+    { "mealId": 2, "userId": 1 },
+    { "mealId": 3, "userId": 1 },
+    { "mealId": 2, "userId": 2 },
+    { "mealId": 3, "userId": 3 }
 ]
