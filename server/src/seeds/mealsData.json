@@ -1,5 +1,5 @@
 [
-    { "mealName": "Arrabiata", "mealDBId": 52771, "strCategory": "Vegetarian", "strArea": "Italian", "strInstructions": "Here's some instructions!" },
-    { "mealName": "Smoked Haddock Kedgeree", "mealDBId": 52964, "strCategory": "Breakfast", "strArea": "Indian", "strInstructions": "Do some stuff!" },
-    { "mealName": "Strawberries Romanoff", "mealDBId": 53082, "strCategory": "Dessert", "strArea": "Russian", "strInstructions": "In a bowl do some stuff!" }
+    { "mealName": "Arrabiata", "mealDBId": 52771, "strCategory": "Vegetarian", "strArea": "Italian", "strMealThumb": "https:\/\/www.themealdb.com\/images\/media\/meals\/ustsqw1468250014.jpg" },
+    { "mealName": "Smoked Haddock Kedgeree", "mealDBId": 52964, "strCategory": "Breakfast", "strArea": "Indian", "strMealThumb": "https:\/\/www.themealdb.com\/images\/media\/meals\/1550441275.jpg" },
+    { "mealName": "Strawberries Romanoff", "mealDBId": 53082, "strCategory": "Dessert", "strArea": "Russian", "strMealThumb": "https:\/\/www.themealdb.com\/images\/media\/meals\/oe8rg51699014028.jpg" }
 ]

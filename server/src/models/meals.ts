@@ -6,7 +6,7 @@ export class Meal extends Model<InferAttributes<Meal>, InferCreationAttributes<M
     declare mealDBId: number;
     declare strCategory: string;
     declare strArea: string;
-    declare strInstructions: string;
+    declare strMealThumb: string;
 }
 
 export function MealFactory (sequelize: Sequelize): typeof Meal {
@@ -33,7 +33,7 @@ export function MealFactory (sequelize: Sequelize): typeof Meal {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            strInstructions:{
+            strMealThumb:{
                 type: DataTypes.STRING,
                 allowNull: true
             }

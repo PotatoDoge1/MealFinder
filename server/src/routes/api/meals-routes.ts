@@ -29,6 +29,11 @@ router.get('/:id', async (req: Request, res: Response) => {
     } catch(error: any) {
         res.status(500).json({message: error.message});
     }
-})
+});
+
+
+// new route to be able to LVOE or LIKE a meal.. add to idea list..
+
+// so when a person says yes or wahtever, that entry is dropped in the meals table where you know what user stored what meal.
 
 export { router as mealsRouter };
