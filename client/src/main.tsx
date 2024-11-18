@@ -5,6 +5,7 @@ import App from './App';
 import Error from './pages/Error';
 import Search from './pages/Search';
 import Saved from './pages/Saved';
+import React from 'react';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
-);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
+}
