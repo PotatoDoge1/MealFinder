@@ -27,7 +27,7 @@ export default function Saved() {
         <p>No saved recipes yet.</p>
       ) : (
         <div>
-          {savedRecipes.map((recipe, index) => (
+          {savedRecipes.map((recipe: any, index) => (
             <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
               {recipe.image && <img src={recipe.image} alt={recipe.name} style={{ maxWidth: '100px' }} />}
               <p><strong>Name:</strong> {recipe.name}</p>

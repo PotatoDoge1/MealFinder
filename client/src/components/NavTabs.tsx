@@ -12,7 +12,7 @@ function NavTabs() {
           to="/"
           className={currentPage === '/Search' ? 'nav-link active' : 'nav-link'}
         >
-          Recipie Search 
+          Recipe Search 
         </Link>
       </li>
       <li className="nav-item">
@@ -20,7 +20,7 @@ function NavTabs() {
           to="/Saved"
           className={currentPage === '/Saved' ? 'nav-link active' : 'nav-link'}
         >
-          Saved Recipie
+          Saved Recipes
         </Link>
       </li>
     </ul>
