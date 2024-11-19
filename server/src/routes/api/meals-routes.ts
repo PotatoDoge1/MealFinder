@@ -16,7 +16,7 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 // GET /meals/:id
-//localhost:3001/api/meals/:id
+// localhost:3001/api/meals/:id
 router.get('/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
@@ -32,8 +32,40 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 
-// new route to be able to LVOE or LIKE a meal.. add to idea list..
+// api to add a meal to a database; to be called and executed before saving a meal
+// localhost:3001/api/meals
+router.post('/', async (req: Request, res: Response) => {
+    const { mealName, mealDBId, strCategory, strArea, strMealThumb } = req.body;
 
-// so when a person says yes or wahtever, that entry is dropped in the meals table where you know what user stored what meal.
+    try {
+        // Validate required fields
+        if (!mealName || !mealDBId) {
+            res.status(400).json({ message: 'Meal name and MealDB Id are required fields.'});
+            return;
+        }
+
+        // Make sure the meal does not already exist
+        const existingMeal = await Meal.findOne({ where: {mealDBId} });
+        if (existingMeal) {
+            res.status(409).json({
+                message: `Meal with MealDB Id ${mealDBId} already exists.`
+            })
+        }
+
+        // Create and add a new meal in the database
+        const newMeal = await Meal.create({
+            mealName,
+            mealDBId,
+            strCategory,
+            strArea,
+            strMealThumb
+        });
+
+        // Return the created meal
+        res.status(201).json(newMeal);
+    } catch (error: any) {
+        res.status(500).json({message: error.message});
+    }
+});
 
 export { router as mealsRouter };
