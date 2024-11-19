@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
 
 export default function Saved() {
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -12,9 +13,9 @@ export default function Saved() {
     const updatedRecipes = savedRecipes.filter((_, i) => i !== index);
     setSavedRecipes(updatedRecipes);
     localStorage.setItem('savedFood', JSON.stringify(updatedRecipes));
-  };
+  }
 
-  function clearAllFood(){
+  function clearAllFood() {
     localStorage.removeItem('savedFood');
     setSavedRecipes([]);
   }
@@ -30,14 +31,23 @@ export default function Saved() {
               <h2>{recipe.name}</h2>
               {recipe.image && <img src={recipe.image} alt={recipe.name} style={{ width: '200px' }} />}
               <p><strong>Instructions:</strong> {recipe.instructions}</p>
-              <button onClick={removeFood(index)}>Remove</button>
+              {/* Wrap the removeFood call in an arrow function */}
+              <Button variant="danger" onClick={() => removeFood(index)}>
+                Remove
+              </Button>
             </div>
           ))}
         </div>
       ) : (
         <p>No saved recipes found.</p>
       )}
-      <button onClick={clearAllFood}>Clear</button>
+
+      {/* Attach the clearAllFood function to the Clear button */}
+      {savedRecipes.length > 0 && (
+        <Button variant="warning" onClick={clearAllFood}>
+          Clear All
+        </Button>
+      )}
     </div>
   );
 }
