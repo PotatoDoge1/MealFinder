@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 const Search: React.FC = () =>
 {
 
-  const [authToken, setAuthToken] = useState<string | null>(localStorage.getItem('id_token'));
+  const [authToken] = useState<string | null>(localStorage.getItem('id_token'));
 
   const [saved, setSaved] = useState('Save');
 
@@ -16,7 +16,10 @@ const Search: React.FC = () =>
     idMeal: ''
   });
 
-  async function searchFood(){
+  async function searchFood() {
+
+    setSaved('Save');
+
     try {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
       const data = await response.json(); 
