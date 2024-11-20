@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import './App.css'
 import FooterEl from './components/FooterEl.tsx';
 import Navbar from './components/Navbar.tsx';
-import fetchRandomFood from './api/fetchRandomFood.tsx';
+//import FetchRandomFood from './api/fetchRandomFood.tsx';
 
 function App() {
 
@@ -15,10 +15,12 @@ function App() {
       <main className="container pt-5">
         <Outlet />
       </main>
+      {/*
       <div>
-        <button onClick={ fetchRandomFood }> Random Food
-        </button>
+        <button onClick={ fetchRandomFood }> Random Food </button>
       </div>
+      */}
+ 
       <footer>
         <FooterEl />
       </footer>

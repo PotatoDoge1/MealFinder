@@ -2,8 +2,10 @@ import { DataTypes, type Sequelize, Model, InferAttributes, InferCreationAttribu
 
 export class UserMeals extends Model<InferAttributes<UserMeals>, InferCreationAttributes<UserMeals>> {
     declare userMealId: CreationOptional<number>;
-    declare mealId: number;
+    declare mealId?: number;
+    declare apiMealId?: String;
     declare userId: number;
+    declare data?: Text;
 }
 
 export function UserMealsFactory (sequelize: Sequelize): typeof UserMeals{
@@ -16,11 +18,20 @@ export function UserMealsFactory (sequelize: Sequelize): typeof UserMeals{
             },
             mealId: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                //allowNull: true
             },
+
+            apiMealId: {
+                type: DataTypes.STRING
+            },
+
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false
+            },
+
+            data: {
+                type: DataTypes.TEXT
             }
         },
         {

@@ -1,25 +1,30 @@
-// import React from 'react';
-// import type { Meal } from '../interfaces/MealInterface.tsx';
+import React from 'react';
+import type { Meal } from '../interfaces/MealInterface.tsx';
+import fetchRandomFood from '../api/fetchRandomFood.tsx';
 
-// // Props for the FecthButton
-// interface FetchButtonProps {
-//   setData: React.Dispatch<React.SetStateAction<Meal>>;
-// }
+// Props for the FecthButton
+interface FetchButtonProps {
+  setData: React.Dispatch<React.SetStateAction<Meal>>;
+}
 
-// const fetchRandomButton: React.FC<FetchButtonProps> = ({ setData }) => {
-//     const fetchData = async () => {
-//         try{
-//           const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
-//           const data = await response.json();
+const FetchRandomButton: React.FC<FetchButtonProps> = ({ setData }) => {
+    const randomMeal = async () => {
+        try{
+          const response = await fetchRandomFood();
 
-//           setData(data.meals[0]);
+          if (Array.isArray(response) && response.length > 0) {
+            setData(response[0]);
+          } else {
+            console.log('No meal found');
+          }
     
-//         } catch (error) {
-//           console.log('Error fetching data from database: ', error);
-//         }
+        } catch (error) {
+          console.log('Error fetching data from meal DB database: ', error);
+        }
 
-//         return <button onClick={fetchData}>Get Random</button>
-//     }
-// }
+    }
 
-// export default fetchRandomButton;
+    return <button onClick={randomMeal}>Get Random</button>;
+}
+
+export default FetchRandomButton;
