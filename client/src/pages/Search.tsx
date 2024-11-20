@@ -2,31 +2,56 @@ import { useState, useEffect } from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-const Search: React.FC = () =>
-{
+const Search: React.FC = () => {
+
+  const [authToken] = useState<string | null>(localStorage.getItem('id_token'));
+
+  const [saved, setSaved] = useState('Save');
+  const [ expand, setExpand ] = useState(false);
 
   const [food, setFood] = useState({
     name: '',
     instructions: '',
     image: '',
+    idMeal: ''
   });
 
-  async function searchFood(){
+  async function searchFood() {
+
+    setSaved('Save');
+
     try {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-      const data = await response.json(); 
+      const data = await response.json();
       setFood({
-          name: data.meals[0].strMeal,
-          instructions: data.meals[0].strInstructions,
-          image: data.meals[0].strMealThumb,
-        })
-      
+        name: data.meals[0].strMeal,
+        instructions: data.meals[0].strInstructions,
+        image: data.meals[0].strMealThumb,
+        idMeal: data.meals[0].idMeal
+      })
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  function saveFood() {
+  const saveFood = async () => {
+
+    const response: any = await fetch(`/api/user-meals/${food.idMeal}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({ data: JSON.stringify(food) })
+    });
+
+    const data = await response.json();
+
+    setSaved(data.userMealId ? 'Saved' : 'Failed to Save');
+
+
+    /*
     if (!food.name || !food.instructions || !food.image) {
       alert("No valid recipe to save!");
       return;
@@ -43,6 +68,8 @@ const Search: React.FC = () =>
     localStorage.setItem('savedFood', JSON.stringify(savedFood));
     alert(`${food.name} has been saved!`);
     console.log("Saved recipes:", savedFood);
+    */
+
   }
 
   useEffect(() => {
@@ -51,20 +78,54 @@ const Search: React.FC = () =>
 
   return (
     <div>
-      <div class="d-flex justify-content-center">
-      <h1>Recipe Search</h1>
+
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 10,
+        marginBottom: 25,
+        marginTop: 25,
+      }}>
+
+        {food.image ? (
+          <div style={{
+            flex: '1 1 auto',
+          }}>
+            <img src={food.image} alt={`${food.name}`} style={{
+              maxWidth: '300px',
+              borderRadius: 25,
+            }} />
+          </div>
+        ) : null}
+
+        <div style={{
+          flex: '1 1 50%',
+          textAlign: 'left',
+        }}>
+          <h1>Recipe Search</h1>
+          <p><strong>Name:</strong> {food.name}</p>
+          
+          <div>
+            <p>
+              <strong>Instructions:</strong>
+              { expand ? food.instructions : `${food.instructions.slice(0, 250)}...` }
+            </p>
+            <Button variant="primary" onClick={() => setExpand(!expand)}>Read {expand ? 'Less' : 'More'}</Button>
+          </div>
+
+        </div>
+
       </div>
-      {food.image && <img src={food.image} alt={`${food.name}`}/>}
-      <p><strong>Name:</strong> {food.name}</p>
-      <p><strong>Instructions:</strong> {food.instructions}</p>
-      
 
       <div className="d-flex justify-content-between">
-      <Button variant="primary" onClick={saveFood}>Save</Button>
-      
-      <Button variant="primary" onClick ={searchFood}>Next</Button >
+
+        {authToken ? <Button variant="primary" onClick={saveFood}>{saved}</Button> : null}
+
+        <Button variant="primary" onClick={searchFood}>Next</Button >
+
       </div>
-    
+
+
     </div>
   );
 };
