@@ -1,0 +1,7 @@
+[
+    { "mealId": 1, "userId": 1 },
+    { "mealId": 2, "userId": 1 },
+    { "mealId": 3, "userId": 1 },
+    { "mealId": 2, "userId": 2 },
+    { "mealId": 3, "userId": 3 }
+]
