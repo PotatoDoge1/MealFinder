@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
 import { useNavigate } from 'react-router-dom';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -18,6 +18,13 @@ const Login = () => {
 
   const [message, setMessage] = useState(qmessage || '');
 
+  useEffect(() => {
+    setMessage('');
+    setLoginData({
+      username: '',
+      password: ''
+    });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -44,29 +51,56 @@ const Login = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-         if( action == 'signup') try {
+         if( action === 'signup') 
 
-          const data = await signup(loginData);
+          try {
+            setMessage('');
 
-          if (data.error) setMessage(data.error);
+            const data = await signup(loginData);
 
-          if (data.userId) navigate('/login?message=Success. Please login.');
+            if (data.error) setMessage(data.error);
+
+            if (data.userId) navigate('/login?message=Success. Please login.');
 
         } catch(err:any) {
           setMessage(err);
         }
 
-        if (action != 'signup') try {
+        if (action != 'login') 
+          console.log('log for me')
+          try {
+            setMessage('');
             // Call the login API endpoint with loginData
-            const data = await login(loginData);
-            // If the login is successful, call Auth.login to store the token in localStorage
-            if (data.token) Auth.login(data.token);
 
-            console.log(data);
+            const data = await login(loginData);
+
+            console.log('login attempt = ', data);
+            console.log('login error =', data.error);
+
+            // If the login is successful, call Auth.login to store the token in localStorage
+            if (data.token) {
+              Auth.login(data.token);
+              setMessage('');
+            
+            }
+
+            
+
+            console.log('data token =', data.token); console.log(data);
 
         } catch (err:any) {
-          setMessage(err);
           //  console.error('Failed to login', err); // Log any errors that occur during login
+
+          setMessage(err);
+          
+          setLoginData({
+            username: '',
+            password: ''
+          });
+
+          setTimeout(() => {
+            setMessage('')
+          }, 5000);
         }
 
 
@@ -111,8 +145,6 @@ const Login = () => {
               { action != 'signup' ? (
                 <Link to="/login?action=signup">Signup</Link>
               ) : null }
-
-              
 
             </div>
           </form>
