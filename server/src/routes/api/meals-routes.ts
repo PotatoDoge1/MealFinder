@@ -49,7 +49,8 @@ router.post('/', async (req: Request, res: Response) => {
         if (existingMeal) {
             res.status(409).json({
                 message: `Meal with MealDB Id ${mealDBId} already exists.`
-            })
+            });
+            return;
         }
 
         // Create and add a new meal in the database

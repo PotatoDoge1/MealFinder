@@ -24,6 +24,24 @@ class AuthService {
         localStorage.removeItem('id_token');
         window.location.assign('/');
     }
+
+    // Add a method to get the logged in username
+    getUsername(): string | null {
+        const token = this.getToken();
+        if (!token) {
+            return null;
+        }
+
+        try {
+            const decodedToken = JSON.parse(atob(token.split('.')[1]));
+            return decodedToken.username || null;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+        }
+    }
+    
+
 }
 
 // Export an instance of the AuthService class
