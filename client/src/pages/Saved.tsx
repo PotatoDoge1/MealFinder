@@ -8,6 +8,14 @@ import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 
+interface recp {
+  name?: string;
+  image?: string;
+  instructions?: string;
+  apiMealId?: string;
+  userMealId?: string;
+}
+
 
 //export default function Saved() {
 const Saved: React.FC = () => {
@@ -18,9 +26,9 @@ const Saved: React.FC = () => {
   const handleShow = () => setShow(true);
 
   const [authToken] = useState<string | null>(localStorage.getItem('id_token'));
-  const [savedRecipes, setSavedRecipes] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState<recp[]>([]);
   const [message, setMessage] = useState<string>('');
-  const [recipe, setRecipe] = useState<any>(null);
+  const [recipe, setRecipe] = useState<recp>({});
 
   const fetchFood = async () => {
 
@@ -80,11 +88,6 @@ const Saved: React.FC = () => {
     fetchFood();
   }
 
-  function clearAllFood() {
-    localStorage.removeItem('savedFood');
-    setSavedRecipes([]);
-  }
-
   return (
     <div>
       <h1>Saved Recipes</h1>
@@ -110,9 +113,13 @@ const Saved: React.FC = () => {
               }}>
 
                 <Card.Title>{recipe.name}</Card.Title>
-                <Card.Text>
-                {recipe.instructions.substring(0, 100)}...
-                </Card.Text>
+
+
+                { recipe.instructions ? (
+                  <Card.Text>
+                  {recipe.instructions.substring(0, 100)}...
+                  </Card.Text>
+                ) : null }
 
                 <ButtonGroup aria-label="Basic example">
                   <Button variant="danger" onClick={() => removeFood(recipe)}>Remove</Button>
