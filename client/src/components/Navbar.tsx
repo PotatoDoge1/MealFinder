@@ -12,7 +12,6 @@ const Navbar = () => {
             setLoginCheck(true); // Set loginCheck to true if user is logged in
         }
     };
-
     // Variable to indicate if we are on the login page so we can hide it
     const isLoginPage = location.pathname === '/login';
 
@@ -38,6 +37,9 @@ const Navbar = () => {
                 }}>Logout</button>
               ) : null //do not render anything on the login page if not logged in
             }
+
+            <Link to='/saved'>Saved</Link>
+            
           </div>
         </div>
       )
