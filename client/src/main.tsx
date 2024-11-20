@@ -1,11 +1,14 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App.tsx'
 import './index.css'
 import ErrorPage from './pages/Error.tsx';
-import Home from './pages/Home.tsx';
+import Search from './pages/Search.tsx';
+import Saved from './pages/Saved.tsx';
 import Login from './pages/Login.tsx';
+
 
 const router = createBrowserRouter([
   {
@@ -13,14 +16,24 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+
       {
         index: true,
-        element: <Home />
+        path: '/',
+        element: <Search />,
       },
+
       {
         path: '/login',
         element: <Login />
-      }
+      },
+
+      {
+        path: '/saved',
+        element: <Saved />,
+      },
+
+
     ]
   }
 ]);
