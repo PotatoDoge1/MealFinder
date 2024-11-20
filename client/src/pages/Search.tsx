@@ -102,7 +102,9 @@ const Search: React.FC = () => {
           flex: '1 1 50%',
           textAlign: 'left',
         }}>
-          <h1>Recipe Search</h1>
+          
+          <h1><strong>Recipe Search</strong></h1>
+          
           <p><strong>Name:</strong> {food.name}</p>
           
           <div>
@@ -119,9 +121,9 @@ const Search: React.FC = () => {
 
       <div className="d-flex justify-content-between">
 
-        {authToken ? <Button variant="primary" onClick={saveFood}>{saved}</Button> : null}
+        {authToken ? <Button variant="info" onClick={saveFood}>{saved}</Button> : null}
 
-        <Button variant="primary" onClick={searchFood}>Next</Button >
+        <Button variant="info" onClick={searchFood}>Next</Button >
 
       </div>
 
