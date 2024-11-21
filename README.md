@@ -1,7 +1,7 @@
-# Project-Two-Group-1 Meal Management Application
+# MealFinder Application
 
 ## Deployed application
-[Deployed application - https://mealfinder5.onrender.com](https://github.com/PotatoDoge1/MealFinder.git)
+[Deployed application - https://mealfinder5.onrender.com](https://mealfinder5.onrender.com)
 
 ## **Description**
 This application is an interactive full-stack web application designed to help users discover, save, and manage their favorite meals. With integration to [TheMealDB API](https://www.themealdb.com/api.php), users can search for meals, view details, save meals to a personalized "liked meals" list, and get random meal suggestions for inspiration. This application is built with a robust backend using Node.js, Express.js, and PostgreSQL, paired with a responsive React.js frontend.
