@@ -37,8 +37,8 @@ const Navbar = () => {
                 }}>Logout</button>
               ) : null //do not render anything on the login page if not logged in
             }
-
-            <Link to='/saved'>Saved</Link>
+            <button className="btn m-3" type='button'> <Link to='/'>Search</Link> </button>
+            <button className="btn" type='button'> <Link to='/saved'>Saved</Link> </button>
             
           </div>
         </div>
