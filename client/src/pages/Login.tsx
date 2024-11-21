@@ -109,7 +109,7 @@ const Login = () => {
               <button className="btn btn-primary" type='submit'>{ action == 'signup' ? 'Signup' : 'Login' }</button>
 
               { action != 'signup' ? (
-                <Link to="/login?action=signup">Signup</Link>
+                <button className="btn btn-primary m-3"> <Link to="/login?action=signup">Signup</Link> </button>
               ) : null }
 
               

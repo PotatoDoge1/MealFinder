@@ -40,7 +40,20 @@ router.post('/:mealId', async (req: any, res: Response) => {
     
     try {
 
-        // Save a newUserMeal if the user and meal exist in the database
+        // Check if the meal is already saved for the user
+        // Check if the meal is already saved for this user
+        const existingUserMeal = await UserMeals.findOne({
+            where: {
+                userId: Number(req.user.userId),
+                apiMealId: mealId,
+            },
+        });
+
+        if (existingUserMeal) {
+            // Meal is already saved
+            res.status(400).json({ message: 'Meal already saved for this user.' });
+        } else {
+            // Save a newUserMeal if the user and meal exist in the database
         const newUserMeal = await UserMeals.create({
             userId: Number(req.user.userId),
             apiMealId: mealId,
@@ -48,6 +61,7 @@ router.post('/:mealId', async (req: any, res: Response) => {
             //mealId: Number(mealId) // for now we'll use the meal ID that comes from the front-end API.
         });
         res.status(201).json(newUserMeal);
+        }
 
     } catch (error: any) {
         res.status(500).json({ message: error.message });
