@@ -150,7 +150,7 @@ const Saved: React.FC = () => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Instrunctions</Modal.Title>
+          <Modal.Title>Instructions</Modal.Title>
         </Modal.Header>
         <Modal.Body>{recipe ? recipe.instructions : 'Pick a recipe.'}</Modal.Body>
         <Modal.Footer>
