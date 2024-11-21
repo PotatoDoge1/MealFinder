@@ -109,7 +109,7 @@ const Search: React.FC = () => {
           
           <div>
             <p>
-              <strong>Instructions:</strong>
+              <strong>Instructions: </strong>
               { expand ? food.instructions : `${food.instructions.slice(0, 250)}...` }
             </p>
             <Button variant="primary" onClick={() => setExpand(!expand)}>Read {expand ? 'Less' : 'More'}</Button>
