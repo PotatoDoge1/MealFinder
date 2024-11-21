@@ -38,7 +38,9 @@ const Navbar = () => {
               ) : null //do not render anything on the login page if not logged in
             }
 
-            <Link to='/saved'>Saved</Link>
+            <Link to='/' className='Links' id='search'>Search</Link>
+
+            <Link to='/saved' className='Links' id='saved'>Saved</Link>
             
           </div>
         </div>

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import App from './App.tsx'
 import './index.css'
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         path: '/saved',
         element: <Saved />,
       },
-
+      
 
     ]
   }
