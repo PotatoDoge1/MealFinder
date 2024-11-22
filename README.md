@@ -56,10 +56,10 @@ git clone https://github.com/PotatoDoge1/Project-Two-Group-1.git
 cd Project-Two-Group-1
 
 ### **2. Set up a .env file**
-DB_NAME='meal_matchers_db'
-DB_USER=
-DB_PASSWORD=
-JWT_SECRET_KEY=
+DB_NAME='meal_matchers_db'  
+DB_USER=  
+DB_PASSWORD=  
+JWT_SECRET_KEY=  
 
 ### **3. Run npm install
 
