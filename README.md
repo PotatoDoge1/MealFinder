@@ -51,7 +51,7 @@ The project demonstrates modern software development practices, including RESTfu
 ## **Installation**
 
 ### **1. Clone the Repository**
-```bash
+bash
 git clone https://github.com/PotatoDoge1/Project-Two-Group-1.git
 cd Project-Two-Group-1
 
