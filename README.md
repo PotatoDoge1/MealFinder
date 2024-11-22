@@ -61,12 +61,12 @@ DB_USER=
 DB_PASSWORD=  
 JWT_SECRET_KEY=  
 
-### **3. Run npm install
+### **3. Run npm install**
 
-### **4. Run npm install bootstrap
+### **4. Run npm install bootstrap**
 
-### **5. You can seed the database with the schema database if you are running it locally
+### **5. You can seed the database with the schema database if you are running it locally**
 
-### **6. Refer to the package.json file to run it
+### **6. Refer to the package.json file to run it**
 
 
